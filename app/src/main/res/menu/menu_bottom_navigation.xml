@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="action_sleep_list"
+        android:enabled="true"
+        android:icon="@drawable/baseline_format_list_bulleted_24"
+        android:title="@string/action_sleep_list_text"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_article_search"
+        android:enabled="true"
+        android:icon="@drawable/baseline_dashboard_24"
+        android:title="@string/action_dashboard_text"
+        app:showAsAction="ifRoom" />
+</menu>

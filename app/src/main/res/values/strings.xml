@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BitFit2</string>
+    <string name="action_sleep_list_text">List</string>
+    <string name="action_dashboard_text">Dashboard</string>
 </resources>

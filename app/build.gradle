@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.udemy.bitfit2'
+    namespace 'com.codepath.bitfit2'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.udemy.bitfit2"
+        applicationId "com.codepath.bitfit2"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -41,4 +41,5 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
