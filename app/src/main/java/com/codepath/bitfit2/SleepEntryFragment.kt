@@ -21,6 +21,8 @@ class SleepEntryFragment : Fragment(), OnListFragmentInteractionListener {
             .show()
     }
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,5 +68,11 @@ class SleepEntryFragment : Fragment(), OnListFragmentInteractionListener {
 
         }
         return view
+    }
+
+    companion object {
+        fun newInstance(): SleepEntryFragment {
+            return SleepEntryFragment()
+        }
     }
 }
