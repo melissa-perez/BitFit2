@@ -1,5 +1,22 @@
 <resources>
-    <string name="app_name">BitFit2</string>
+    <string name="app_name">BitFit</string>
+    <string name="averageHoursText">Average hours of sleep:</string>
+    <string name="averageFeelingText">Average feeling:</string>
+    <string name="sleepBtnText">Log sleep</string>
+    <string name="sleptHoursText">How many hours did you sleep?</string>
+    <string name="sleptHoursCD">Slide to enter number of hours slept.</string>
+    <string name="feelingsText">How were you feeling when you woke up?</string>
+    <string name="feelingsCD">Slide to enter feeling rating.</string>
+    <string name="notesText">Any other notes?</string>
+    <string name="notesHintText">Ex. sleeping pill, noisy</string>
+    <string name="saveBtnText">Save</string>
+    <string name="dateText">MAR 27 2023</string>
+    <string name="hoursSleptText">8.5</string>
+    <string name="feelingText">1</string>
+    <string name="feelingPromptText">rated feeling</string>
+    <string name="noteText">took a sleeping pill</string>
+    <string name="hours_slept">hours slept</string>
     <string name="action_sleep_list_text">List</string>
     <string name="action_dashboard_text">Dashboard</string>
+
 </resources>

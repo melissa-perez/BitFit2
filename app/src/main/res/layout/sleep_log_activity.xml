@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/space_cadet"
+    tools:context=".LogActivity">
+
+    <TextView
+        android:id="@+id/slept_hours_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="197dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/sleptHoursText"
+        android:textColor="@color/french_gray"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/sleptSlider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/sleptSlider"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/sleptHoursCD"
+        android:stepSize="0.5"
+        android:valueFrom="0.0"
+        android:valueTo="24.0"
+        app:layout_constraintBottom_toTopOf="@+id/feeling_slider_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slept_hours_tv"
+        app:thumbColor="@color/tropical_indigo"
+        app:tickColor="@color/space_cadet"
+        app:trackColor="@color/cornflower_blue" />
+
+    <TextView
+        android:id="@+id/feeling_slider_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="135dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/feelingsText"
+        android:textColor="@color/french_gray"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/feelingSlider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sleptSlider" />
+
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/feelingSlider"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/feelingsCD"
+        android:stepSize="1"
+        android:valueFrom="0.0"
+        android:valueTo="10.0"
+        app:layout_constraintBottom_toTopOf="@+id/notes_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feeling_slider_tv"
+        app:thumbColor="@color/tropical_indigo"
+        app:tickColor="@color/space_cadet"
+        app:trackColor="@color/cornflower_blue" />
+
+    <TextView
+        android:id="@+id/notes_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="290dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/notesText"
+        android:textColor="@color/french_gray"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/notes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feelingSlider" />
+
+    <EditText
+        android:id="@+id/notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints=""
+        android:fontFamily="@font/poppins"
+        android:hint="@string/notesHintText"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/french_gray"
+        android:textColorHint="@color/thistle"
+        android:textColorLink="@color/jordy_blue"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/date_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notes_tv" />
+
+    <Button
+        android:id="@+id/save_entry_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/purple_500"
+        android:fontFamily="@font/poppins"
+        android:text="@string/saveBtnText"
+        android:textColor="@color/french_gray"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_string" />
+
+    <TextView
+        android:id="@+id/date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="314dp"
+        android:fontFamily="@font/poppins"
+        android:text="Date of log"
+        android:textColor="@color/french_gray"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/date_string"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notes" />
+
+    <EditText
+        android:id="@+id/date_string"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints=""
+        android:fontFamily="@font/poppins"
+        android:hint="Ex. Mar 27 2023"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/french_gray"
+        android:textColorHint="@color/thistle"
+        android:textColorLink="@color/jordy_blue"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/save_entry_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_tv" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
