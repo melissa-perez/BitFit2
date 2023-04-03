@@ -29,6 +29,7 @@ class SleepEntryRecyclerAdapter(
         val mFeelingRating: TextView = mView.findViewById<View>(R.id.number_feeling_tv) as TextView
         val mHours: TextView = mView.findViewById<View>(R.id.number_slept_hours_tv) as TextView
         val mNotes: TextView = mView.findViewById<View>(R.id.sleep_log_notes_tv) as TextView
+        var mItem: SleepEntry? = null
 
         override fun toString(): String {
             return mNotes.toString()
@@ -37,10 +38,17 @@ class SleepEntryRecyclerAdapter(
 
     override fun onBindViewHolder(holder: SleepEntryViewHolder, position: Int) {
         val sleepEntry = entries[position]
+        holder.mItem = sleepEntry
         holder.mHours.text = sleepEntry.hours.toString()
         holder.mNotes.text = sleepEntry.notes
         holder.mEntryDate.text = sleepEntry.logDate
         holder.mFeelingRating.text = sleepEntry.feeling.toString()
+
+        holder.mView.setOnClickListener {
+            holder.mItem?.let { sleep ->
+                mListener?.onItemClick(sleep)
+            }
+        }
 
     }
 

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
 class SleepEntryFragment : Fragment(), OnListFragmentInteractionListener {
@@ -17,7 +18,7 @@ class SleepEntryFragment : Fragment(), OnListFragmentInteractionListener {
     private var entries: MutableList<SleepEntry> = mutableListOf()
 
     override fun onItemClick(item: SleepEntry) {
-        Toast.makeText(context, "Hours slept: ${item.hours}", Toast.LENGTH_SHORT)
+        Toast.makeText(context, "Note: ${item.notes}", Toast.LENGTH_LONG)
             .show()
     }
 
@@ -39,7 +40,7 @@ class SleepEntryFragment : Fragment(), OnListFragmentInteractionListener {
         adapter = SleepEntryRecyclerAdapter(entries, this@SleepEntryFragment)
         recyclerView.adapter = adapter
 
-        lifecycleScope.launch {
+        lifecycleScope.launch{
             (requireActivity().application as SleepEntryApplication).db.sleepEntryDao()
                 .getAllSleepEntries().collect { databaseList ->
                     databaseList.map { entity ->
@@ -64,9 +65,8 @@ class SleepEntryFragment : Fragment(), OnListFragmentInteractionListener {
                         adapter.notifyDataSetChanged()
                     }
                 }
-
-
         }
+
         return view
     }
 

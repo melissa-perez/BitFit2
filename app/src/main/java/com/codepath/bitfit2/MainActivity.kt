@@ -6,6 +6,8 @@ import android.app.NotificationManager
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -32,12 +34,25 @@ class MainActivity : AppCompatActivity() {
         val dashboardFragment: Fragment = DashboardFragment()
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
+        // set on click listener for log sleep entry btn
+        sleepEntryBtn = findViewById<Button>(R.id.sleep_record_btn)
+
+        sleepEntryBtn.setOnClickListener {
+            val sleepEntryIntent = Intent(this, LogActivity::class.java)
+            startActivity(sleepEntryIntent)
+        }
         // handle navigation selection
         bottomNavigationView.setOnItemSelectedListener { item ->
             lateinit var fragment: Fragment
             when (item.itemId) {
-                R.id.action_sleep_list -> fragment = sleepListFragment
-                R.id.action_dashboard -> fragment = dashboardFragment
+                R.id.action_sleep_list -> {
+                    fragment = sleepListFragment
+                    sleepEntryBtn.visibility = VISIBLE
+                }
+                R.id.action_dashboard -> {
+                    fragment = dashboardFragment
+                    sleepEntryBtn.visibility = INVISIBLE
+                }
             }
             fragmentManager.beginTransaction().replace(R.id.rlContainer, fragment).commit()
 
@@ -46,14 +61,6 @@ class MainActivity : AppCompatActivity() {
 
         // Set default selection
         bottomNavigationView.selectedItemId = R.id.action_sleep_list
-
-        // set on click listener for log sleep entry btn
-        sleepEntryBtn = findViewById<Button>(R.id.sleep_record_btn)
-
-        sleepEntryBtn.setOnClickListener {
-            val sleepEntryIntent = Intent(this, LogActivity::class.java)
-            startActivity(sleepEntryIntent)
-        }
 
         val n: Notification = Notification.Builder(this)
             .setContentTitle("New mail from " + "test@gmail.com")
@@ -71,21 +78,18 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name: CharSequence = "BITFIT"
-            val description = "Daily notification"
-            val importance = NotificationManager.IMPORTANCE_HIGH
-            val channel = NotificationChannel(
-                "BITFIT", name,
-                importance
-            )
-            channel.description = description
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviours after this
-            val notificationManager = getSystemService(
-                NotificationManager::class.java
-            )
-            notificationManager.createNotificationChannel(channel)
-        }
+        val name: CharSequence = "BITFIT"
+        val description = "Daily notification"
+        val importance = NotificationManager.IMPORTANCE_HIGH
+        val channel = NotificationChannel(
+            "BITFIT", name,
+            importance
+        )
+        channel.description = description
+
+        val notificationManager = getSystemService(
+            NotificationManager::class.java
+        )
+        notificationManager.createNotificationChannel(channel)
     }
 }

@@ -8,10 +8,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.XAxis.XAxisPosition
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import kotlinx.coroutines.Dispatchers.Default
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -22,15 +28,32 @@ class DashboardFragment : Fragment() {
     private var feelings: List<Pair<Float, Int>> = mutableListOf()
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
         val chart = view.findViewById(R.id.chart) as LineChart
+        chart.description.text = "Log entries"
+        chart.description.typeface = resources.getFont(R.font.poppins)
+        chart.description.textSize = 10.0f
+        chart.setNoDataText("No data entered yet.")
+        chart.setBackgroundColor(resources.getColor(R.color.thistle))
+        val xAxis = chart.xAxis
+        xAxis.position = XAxisPosition.BOTTOM
+        xAxis.granularity = 1.0f
+        var MAX_X: Long? = null
+        var MIN_X: Long? = null
+
+
+        val rightYAxis = chart.axisRight
+        rightYAxis.setEnabled(false)
+
         var formatter = DateTimeFormatter.ofPattern("M/d/yyyy")
         formatter = formatter.withLocale(Locale.US)
-        lifecycleScope.launch {
+
+        lifecycleScope.launch(IO) {
             (requireActivity().application as SleepEntryApplication).db.sleepEntryDao()
                 .getAllSleepEntries().collect { databaseList ->
                     databaseList.map { entity ->
@@ -45,11 +68,15 @@ class DashboardFragment : Fragment() {
                         hours = mappedList.map { pair ->
                             val millis = LocalDate.parse(pair.sleepDate, formatter)
                                 .toEpochDay() * 24 * 60 * 60 * 1000
+                            if(MAX_X == null || MAX_X!! < millis) MAX_X = millis
+                            if(MIN_X == null || MIN_X!! > millis) MIN_X = millis
 
                             Pair(
                                 millis.toFloat(),
                                 pair.sleptHours
                             )
+
+
                         }
 
                         feelings = mappedList.map { pair ->
@@ -62,14 +89,38 @@ class DashboardFragment : Fragment() {
                         }
                     }
                 }
-            Log.d("dash", hours.toString())
-            Log.d("dash", feelings.toString())
+            xAxis.axisMinimum = (MIN_X!!.toFloat())
+            xAxis.axisMaximum = (MAX_X!!.toFloat())
+
         }
-        val chartEntries = hours.map { hour -> Entry(hour.first, hour.second) }
-        val dataSet = LineDataSet(chartEntries, "Label")
-        val lineData = LineData(dataSet)
+        val hourEntries = LineDataSet(hours.map { hour -> Entry(hour.first, hour.second) }, "Slept hours")
+        hourEntries.setColors(resources.getColor(R.color.space_cadet))
+
+        val feelEntries =
+            LineDataSet(feelings.map { feel -> Entry(feel.first, feel.second.toFloat()) }, "Feeling")
+        feelEntries.setColors(resources.getColor(R.color.tekhelet))
+
+        val dateFormat: ValueFormatter = object : ValueFormatter() {
+            override fun getFormattedValue(value: Float): String {
+
+                val simpleDateFormat = SimpleDateFormat("M/dd/yyyy", Locale.US)
+                Log.d("format",simpleDateFormat.format(value) )
+                return simpleDateFormat.format(value).toString()
+            }
+        }
+
+
+        val sets: ArrayList<ILineDataSet> = ArrayList()
+        sets.add(hourEntries)
+        sets.add(feelEntries)
+
+
+        xAxis.valueFormatter = dateFormat
+        xAxis.granularity = 1f
+        xAxis.isEnabled = false
+        val lineData = LineData(sets)
         chart.data = lineData
-        chart.invalidate() // refresh
+        chart.invalidate()
         return view
     }
 
