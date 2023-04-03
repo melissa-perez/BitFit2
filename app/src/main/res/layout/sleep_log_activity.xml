@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="197dp"
         android:fontFamily="@font/poppins"
         android:text="@string/sleptHoursText"
@@ -91,7 +92,7 @@
 
     <EditText
         android:id="@+id/notes"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -123,7 +124,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_string" />
+        app:layout_constraintTop_toBottomOf="@+id/datePicker" />
 
     <TextView
         android:id="@+id/date_tv"
@@ -135,31 +136,22 @@
         android:text="Date of log"
         android:textColor="@color/french_gray"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/date_string"
+        app:layout_constraintBottom_toTopOf="@+id/datePicker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notes" />
 
-    <EditText
-        android:id="@+id/date_string"
-        android:layout_width="match_parent"
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:fontFamily="@font/poppins"
-        android:hint="Ex. Mar 27 2023"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColor="@color/french_gray"
-        android:textColorHint="@color/thistle"
-        android:textColorLink="@color/jordy_blue"
-        android:textSize="14sp"
+        android:background="@color/thistle"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
         app:layout_constraintBottom_toTopOf="@+id/save_entry_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_tv" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/date_tv"
+        app:layout_constraintVertical_bias="0.427" />
 </androidx.constraintlayout.widget.ConstraintLayout>

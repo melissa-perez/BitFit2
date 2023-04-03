@@ -23,21 +23,22 @@
         android:id="@+id/sleep_record_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="72dp"
         android:backgroundTint="@color/purple_500"
-        android:font="@font/poppins"
-        android:fontWeight="700"
+        android:fontFamily="@font/poppins"
         android:text="@string/sleepBtnText"
         android:textAlignment="center"
         android:textColor="@color/french_gray"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout
         android:id="@+id/rlContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

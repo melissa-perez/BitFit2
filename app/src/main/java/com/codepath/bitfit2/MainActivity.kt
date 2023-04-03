@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         val fragmentManager: FragmentManager = supportFragmentManager
 
         val sleepListFragment: Fragment = SleepEntryFragment()
+        val dashboardFragment: Fragment = DashboardFragment()
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
         // handle navigation selection
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             lateinit var fragment: Fragment
             when (item.itemId) {
                 R.id.action_sleep_list -> fragment = sleepListFragment
-                R.id.action_dashboard -> fragment = sleepListFragment
+                R.id.action_dashboard -> fragment = dashboardFragment
             }
             fragmentManager.beginTransaction().replace(R.id.rlContainer, fragment).commit()
 

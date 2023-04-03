@@ -18,5 +18,7 @@
     <string name="hours_slept">hours slept</string>
     <string name="action_sleep_list_text">List</string>
     <string name="action_dashboard_text">Dashboard</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
