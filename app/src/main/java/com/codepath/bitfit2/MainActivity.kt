@@ -1,25 +1,29 @@
 package com.codepath.bitfit2
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.codepath.bitfit2.R.id
 import com.codepath.bitfit2.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var sleepEntryBtn: Button
     private var binding: ActivityMainBinding? = null
-
+   private var ID = 1
     override fun onCreate(savedInstanceState: Bundle?) {
+        createNotificationChannel()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
 
         val supportFragmentManager = supportFragmentManager
         val fragmentManager: FragmentManager = supportFragmentManager
@@ -49,6 +53,39 @@ class MainActivity : AppCompatActivity() {
         sleepEntryBtn.setOnClickListener {
             val sleepEntryIntent = Intent(this, LogActivity::class.java)
             startActivity(sleepEntryIntent)
+        }
+
+        val n: Notification = Notification.Builder(this)
+            .setContentTitle("New mail from " + "test@gmail.com")
+            .setContentText("Subject")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setAutoCancel(true)
+            .setWhen(System.currentTimeMillis())
+            .build()
+
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+
+        notificationManager.notify(ID++, n)
+
+    }
+
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name: CharSequence = "BITFIT"
+            val description = "Daily notification"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel(
+                "BITFIT", name,
+                importance
+            )
+            channel.description = description
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviours after this
+            val notificationManager = getSystemService(
+                NotificationManager::class.java
+            )
+            notificationManager.createNotificationChannel(channel)
         }
     }
 }

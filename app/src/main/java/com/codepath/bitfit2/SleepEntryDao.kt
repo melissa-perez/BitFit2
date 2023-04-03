@@ -21,4 +21,5 @@ interface SleepEntryDao {
 
     @Query("SELECT AVG(sleptHours) FROM sleep_entry_table")
     fun getHoursAverage(): Double
+
 }
