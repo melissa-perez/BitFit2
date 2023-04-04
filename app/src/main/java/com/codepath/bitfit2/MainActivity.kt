@@ -1,29 +1,39 @@
 package com.codepath.bitfit2
 
-import android.app.Notification
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.codepath.bitfit2.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var sleepEntryBtn: Button
     private var binding: ActivityMainBinding? = null
    private var ID = 1
+    @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
-        createNotificationChannel()
         super.onCreate(savedInstanceState)
+        createNotificationChannel()
+        // Build the notification
+        val builder: NotificationCompat.Builder = NotificationCompat.Builder(this, "channel_id")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("BitFit Daily Reminder")
+            .setContentText("Log your sleep for the day!")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        val notificationManager = NotificationManagerCompat.from(this)
+        notificationManager.notify(1, builder.build())
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
@@ -60,33 +70,15 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        // Set default selection
-
-        val n: Notification = Notification.Builder(this)
-            .setContentTitle("New mail from " + "test@gmail.com")
-            .setContentText("Subject")
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setAutoCancel(true)
-            .setWhen(System.currentTimeMillis())
-            .build()
-
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-
-        notificationManager.notify(ID++, n)
-
     }
 
 
     private fun createNotificationChannel() {
-        val name: CharSequence = "BITFIT"
-        val description = "Daily notification"
-        val importance = NotificationManager.IMPORTANCE_HIGH
-        val channel = NotificationChannel(
-            "BITFIT", name,
-            importance
-        )
+        val name: CharSequence = "My Channel"
+        val description = "My Channel Description"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel("channel_id", name, importance)
         channel.description = description
-
         val notificationManager = getSystemService(
             NotificationManager::class.java
         )
