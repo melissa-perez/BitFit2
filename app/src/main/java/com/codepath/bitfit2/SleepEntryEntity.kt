@@ -14,3 +14,9 @@ data class SleepEntryEntity(
     @ColumnInfo(name = "sleepNotes") val sleepNotes: String?,
     @ColumnInfo(name = "sleepDate") val sleepDate: String,
 )
+
+data class ChartEntryEntity(
+    @ColumnInfo(name = "sleptHours") val sleptHours: Float,
+    @ColumnInfo(name = "feelingRating") val feelingRating: Int,
+    @ColumnInfo(name = "sleepDate") val sleepDate: String,
+)

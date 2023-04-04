@@ -1,11 +1,15 @@
 package com.codepath.bitfit2
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +25,6 @@ class SleepEntryFragment : Fragment(), OnListFragmentInteractionListener {
         Toast.makeText(context, "Note: ${item.notes}", Toast.LENGTH_LONG)
             .show()
     }
-
 
 
     override fun onCreateView(
@@ -40,34 +43,51 @@ class SleepEntryFragment : Fragment(), OnListFragmentInteractionListener {
         adapter = SleepEntryRecyclerAdapter(entries, this@SleepEntryFragment)
         recyclerView.adapter = adapter
 
-        lifecycleScope.launch{
-            (requireActivity().application as SleepEntryApplication).db.sleepEntryDao()
-                .getAllSleepEntries().collect { databaseList ->
-                    databaseList.map { entity ->
-                        SleepEntryEntity(
-                            entity.id,
-                            entity.sleptHours,
-                            entity.feelingRating,
-                            entity.sleepNotes,
-                            entity.sleepDate
-                        )
-                    }.also { mappedList ->
-                        val sleepEntries = mappedList.map { sleepEntryEntity ->
-                            SleepEntry(
-                                sleepEntryEntity.sleptHours,
-                                sleepEntryEntity.feelingRating,
-                                sleepEntryEntity.sleepDate,
-                                sleepEntryEntity.sleepNotes
-                            )
-                        }
-                        entries.clear()
-                        entries.addAll(sleepEntries)
-                        adapter.notifyDataSetChanged()
-                    }
-                }
-        }
 
+        lifecycle.addObserver(object : LifecycleObserver {
+            @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+            fun onCreate() {
+                lifecycleScope.launch(IO) {
+                    (requireActivity().application as SleepEntryApplication).db.sleepEntryDao()
+                        .getAllSleepEntries().collect { databaseList ->
+                            databaseList.map { entity ->
+                                SleepEntryEntity(
+                                    entity.id,
+                                    entity.sleptHours,
+                                    entity.feelingRating,
+                                    entity.sleepNotes,
+                                    entity.sleepDate
+                                )
+                            }.also { mappedList ->
+                                val sleepEntries = mappedList.map { sleepEntryEntity ->
+                                    SleepEntry(
+                                        sleepEntryEntity.sleptHours,
+                                        sleepEntryEntity.feelingRating,
+                                        sleepEntryEntity.sleepDate,
+                                        sleepEntryEntity.sleepNotes
+                                    )
+                                }
+                                entries.clear()
+                                entries.addAll(sleepEntries)
+                                databaseList.forEach {
+                                    Log.d(
+                                        "SleepEntryFragment",
+                                        "Entry: ${it.id}, ${it.sleptHours}, ${it.feelingRating}, ${it.sleepNotes}, ${it.sleepDate}"
+                                    )
+                                }
+                                requireActivity().runOnUiThread {
+
+                                    adapter.notifyDataSetChanged()
+                                }
+                            }
+                        }
+                }
+
+            }
+        })
         return view
+
+
     }
 
     companion object {

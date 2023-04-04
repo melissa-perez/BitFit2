@@ -22,4 +22,8 @@ interface SleepEntryDao {
     @Query("SELECT AVG(sleptHours) FROM sleep_entry_table")
     fun getHoursAverage(): Double
 
+    @Query("SELECT sleptHours, feelingRating, sleepDate FROM sleep_entry_table")
+    fun getChartEntries(): Flow<List<ChartEntryEntity>>
+
+
 }
