@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         val sleepListFragment: Fragment = SleepEntryFragment()
         val dashboardFragment: Fragment = DashboardFragment()
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.selectedItemId = R.id.action_sleep_list
 
         // set on click listener for log sleep entry btn
         sleepEntryBtn = findViewById<Button>(R.id.sleep_record_btn)
@@ -54,13 +55,12 @@ class MainActivity : AppCompatActivity() {
                     sleepEntryBtn.visibility = INVISIBLE
                 }
             }
-            fragmentManager.beginTransaction().replace(R.id.rlContainer, fragment).commit()
+            fragmentManager.beginTransaction().replace(R.id.content, fragment).commit()
 
             true
         }
 
         // Set default selection
-        bottomNavigationView.selectedItemId = R.id.action_sleep_list
 
         val n: Notification = Notification.Builder(this)
             .setContentTitle("New mail from " + "test@gmail.com")

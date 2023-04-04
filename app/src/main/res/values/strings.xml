@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">BitFit</string>
-    <string name="averageHoursText">Average hours of sleep:</string>
-    <string name="averageFeelingText">Average feeling:</string>
+    <string name="averageHoursText">Average hours of sleep: </string>
+    <string name="averageFeelingText">Average feeling: </string>
     <string name="sleepBtnText">Log sleep</string>
     <string name="sleptHoursText">How many hours did you sleep?</string>
     <string name="sleptHoursCD">Slide to enter number of hours slept.</string>
@@ -18,7 +18,6 @@
     <string name="hours_slept">hours slept</string>
     <string name="action_sleep_list_text">List</string>
     <string name="action_dashboard_text">Dashboard</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
