@@ -27,7 +27,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='bitfitpart2.gif' title='Video Walkthrough' alt='Video Walkthrough' />
+<img src='bitfitpart2_REDO.gif' title='Video Walkthrough' alt='Video Walkthrough' />
 
 GIF created with LICEcap
 
