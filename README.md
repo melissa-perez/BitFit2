@@ -4,7 +4,7 @@ Submitted by: **Melissa Perez**
 
 **BitFit 2** is a health metrics app that allows users to track sleep.
 
-Time spent: **10** hours spent in total
+Time spent: **15** hours spent in total
 
 ## Required Features
 
@@ -34,6 +34,10 @@ GIF created with LICEcap
 ## Notes
 
 Describe any challenges encountered while building the app.
+
+- Using the MPAndroidChart library
+- Creating notifications
+- Getting UI to work with new Fragment
 
 ## License
 
