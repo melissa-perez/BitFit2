@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/sleep_dashboard_fl"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="170dp"
         android:layout_margin="10dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/average_dashboard"
@@ -29,7 +29,7 @@
             android:fontWeight="500"
             android:text="@string/averageHoursText"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/average_feelings_tv"
@@ -40,8 +40,51 @@
             android:fontWeight="500"
             android:text="@string/averageFeelingText"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
 
+        <TextView
+            android:id="@+id/max_hours_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:font="@font/poppins"
+            android:fontWeight="500"
+            android:text="@string/max_slept_hours"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/min_slept_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:font="@font/poppins"
+            android:fontWeight="500"
+            android:text="@string/minimum_slept_hours"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/max_feeling_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:font="@font/poppins"
+            android:fontWeight="500"
+            android:text="@string/max_feeling"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/min_feeling_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:font="@font/poppins"
+            android:fontWeight="500"
+            android:text="@string/minimum_feeling"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <FrameLayout
@@ -57,7 +100,7 @@
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="match_parent"
             tools:layout_editor_absoluteX="173dp"
             tools:layout_editor_absoluteY="204dp" />
     </FrameLayout>

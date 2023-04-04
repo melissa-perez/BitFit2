@@ -38,6 +38,10 @@ class DashboardFragment : Fragment() {
         val chart = view.findViewById(R.id.chart) as LineChart
         val hoursTV = view.findViewById(R.id.average_hours_tv) as TextView
         val feelsTV = view.findViewById(R.id.average_feelings_tv) as TextView
+        val maxFeelsTv = view.findViewById(R.id.max_feeling_tv) as TextView
+        val minFeelsTv = view.findViewById(R.id.min_feeling_tv) as TextView
+        val maxSleepTv = view.findViewById(R.id.max_hours_tv) as TextView
+        val minSleepTv = view.findViewById(R.id.min_slept_hours) as TextView
 
         var formatter = DateTimeFormatter.ofPattern("M/d/yyyy")
         formatter = formatter.withLocale(Locale.US)
@@ -51,7 +55,22 @@ class DashboardFragment : Fragment() {
             val sleepAverage =
                 (requireActivity().application as SleepEntryApplication).db.sleepEntryDao()
                     .getHoursAverage()
+            val maxSleep =
+                (requireActivity().application as SleepEntryApplication).db.sleepEntryDao()
+                    .getMaxSleep()
+            val minSleep =
+                (requireActivity().application as SleepEntryApplication).db.sleepEntryDao()
+                    .getMinSleep()
+            val maxFeels =
+                (requireActivity().application as SleepEntryApplication).db.sleepEntryDao()
+                    .getMaxFeeling()
+            val minFeels =
+                (requireActivity().application as SleepEntryApplication).db.sleepEntryDao()
+                    .getMinFeeling()
+
             Log.d("dashboard", "$feelingAverage,$sleepAverage")
+            Log.d("dashboard", "$maxSleep,$minSleep")
+            Log.d("dashboard", "$maxFeels,$minFeels")
 
 
             (requireActivity().application as SleepEntryApplication).db.sleepEntryDao()
@@ -88,28 +107,46 @@ class DashboardFragment : Fragment() {
                             hours.map { hour -> Entry(hour.first, hour.second) },
                             "Slept hours"
                         )
-                    hourEntries.setColors(resources.getColor(R.color.space_cadet))
 
                     val feelEntries =
                         LineDataSet(
                             feelings.map { feel -> Entry(feel.first, feel.second.toFloat()) },
                             "Feeling"
                         )
-                    feelEntries.setColors(resources.getColor(R.color.tekhelet))
-                    val sets: ArrayList<ILineDataSet> = ArrayList()
-                    sets.add(hourEntries)
-                    sets.add(feelEntries)
-                    chart.notifyDataSetChanged()
 
-                    val lineData = LineData(sets)
-                    chart.data = lineData
-                    setUpChart(chart)
-                    chart.invalidate()
+
+
+                    if (hourEntries.entryCount != 0) {
+                        hourEntries.setColors(resources.getColor(R.color.space_cadet))
+                        feelEntries.setColors(resources.getColor(R.color.tekhelet))
+
+                        val sets: ArrayList<ILineDataSet> = ArrayList()
+                        sets.add(hourEntries)
+                        sets.add(feelEntries)
+                        Log.d("dashboard", sets.size.toString() + "@" + hourEntries.toString())
+
+                        chart.notifyDataSetChanged()
+                        val lineData = LineData(sets)
+                        chart.data = lineData
+                        setUpChart(chart)
+                        chart.invalidate()
+                    }
+
                     requireActivity().runOnUiThread {
                         hoursTV.text =
                             resources.getString(R.string.averageHoursText) + " " + sleepAverage.toString()
                         feelsTV.text =
                             resources.getString(R.string.averageFeelingText) + " " + feelingAverage.toString()
+
+                        maxSleepTv.text =
+                            resources.getString(R.string.max_slept_hours) + " " + maxSleep.toString()
+                        maxFeelsTv.text =
+                            resources.getString(R.string.max_feeling) + " " + maxFeels.toString()
+
+                        minSleepTv.text =
+                            resources.getString(R.string.minimum_slept_hours) + " " + minSleep.toString()
+                        minFeelsTv.text =
+                            resources.getString(R.string.minimum_feeling) + " " + minFeels.toString()
                     }
 
                 }
@@ -130,7 +167,7 @@ class DashboardFragment : Fragment() {
         //xAxis.granularity = 1.0f
 
         val rightYAxis = chart.axisRight
-        rightYAxis.setEnabled(false)
+        rightYAxis.isEnabled = false
 
         /* val dateFormat: ValueFormatter = object : ValueFormatter() {
              override fun getFormattedValue(value: Float): String {

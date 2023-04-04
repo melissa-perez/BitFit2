@@ -1,6 +1,6 @@
 package com.codepath.bitfit2
 
-class ChartEntry (
+class ChartEntry(
     val hours: Float,
     val feeling: Int
 )

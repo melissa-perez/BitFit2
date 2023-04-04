@@ -16,11 +16,23 @@ interface SleepEntryDao {
     @Query("DELETE FROM sleep_entry_table")
     fun deleteAllSleepEntries()
 
-    @Query("SELECT AVG(feelingRating) FROM sleep_entry_table")
+    @Query("SELECT ROUND(AVG(feelingRating), 2) FROM sleep_entry_table")
     fun getFeelingAverage(): Double
 
-    @Query("SELECT AVG(sleptHours) FROM sleep_entry_table")
+    @Query("SELECT ROUND(AVG(sleptHours), 2) FROM sleep_entry_table")
     fun getHoursAverage(): Double
+
+    @Query("SELECT ROUND(MAX(feelingRating), 2) FROM sleep_entry_table")
+    fun getMaxFeeling(): Double
+
+    @Query("SELECT ROUND(MIN(feelingRating), 2) FROM sleep_entry_table")
+    fun getMinFeeling(): Double
+
+    @Query("SELECT ROUND(MAX(sleptHours), 2) FROM sleep_entry_table")
+    fun getMaxSleep(): Double
+
+    @Query("SELECT ROUND(MIN(sleptHours), 2) FROM sleep_entry_table")
+    fun getMinSleep(): Double
 
     @Query("SELECT sleptHours, feelingRating, sleepDate FROM sleep_entry_table")
     fun getChartEntries(): Flow<List<ChartEntryEntity>>

@@ -20,7 +20,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
     lateinit var sleepEntryBtn: Button
     private var binding: ActivityMainBinding? = null
-   private var ID = 1
+    private var ID = 1
+
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
