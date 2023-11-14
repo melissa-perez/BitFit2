@@ -10,6 +10,12 @@ Time spent: **15** hours spent in total
 
 The following **required** functionality is completed:
 
+
+
+https://github.com/melissa-perez/BitFit2/assets/29667204/e85675a8-5f05-4f89-b812-0e230d1d59c3
+
+
+
 - [x] **Use at least 2 Fragments**
 - [x] **Create a new dashboard fragment where users can see a summary of their entered data**
 - [x] **Use one of the Navigation UI Views (BottomNavigation, Drawer Layout, Top Bar) to move between the fragments**
@@ -24,6 +30,8 @@ The following **additional** features are implemented:
 - [x] Change date EditText to DatePicker for better entry
 
 ## Video Walkthrough
+
+
 
 Here's a walkthrough of implemented user stories:
 
