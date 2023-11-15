@@ -13,7 +13,9 @@ The following **required** functionality is completed:
 
 
 
-https://github.com/melissa-perez/BitFit2/assets/29667204/6e4589ca-1677-4a22-8cd6-9bb0a36f9f69
+https://github.com/melissa-perez/BitFit2/assets/29667204/ea0ce6c5-2d4d-4f29-ab53-8d3a44166481
+
+
 
 
 
